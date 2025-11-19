@@ -1,0 +1,824 @@
+/* Basic Reset & Body Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,500&display=swap");
+
+:root {
+    /* Blue & Purple theme variables (dark defaults) */
+    --bg: #06060b; /* darker background */
+    --panel: #0f1116; /* darker panels */
+    --muted: #aab3ff;
+    --accent1: #2e5bff; /* blue */
+    --accent2: #7b61ff; /* purple - slightly deeper */
+    --text: #e9edff;
+    --header: linear-gradient(90deg, var(--accent1), var(--accent2));
+    /* hero stroke and shadow variables */
+    --hero-stroke: rgba(255,255,255,0.92);
+    --hero-fill-shadow: 0 14px 30px rgba(0,0,0,0.32);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Use Montserrat for headings for stronger typographic presence */
+h1, h2, h3 { font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+
+/* Apple-like polish: increased whitespace and smooth transitions */
+main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem; }
+section { padding: 5rem 0; }
+
+/* Light mode support removed — site uses dark-only styles */
+
+/* Header & Navigation */
+header {
+    /* translucent glass look */
+    background: rgba(10,12,18,0.42);
+    color: var(--text);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    animation: slideInDown 1s ease-in-out;
+    backdrop-filter: blur(8px) saturate(120%);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* light-mode header rules removed */
+
+/* Hide header on scroll down, reveal on scroll up */
+.hide-header { transform: translateY(-110%); transition: transform 260ms ease-in-out; }
+header { transition: transform 260ms ease-in-out; }
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 2rem;
+}
+
+
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 8px;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+/* Logo hover: in light mode show black border and ensure accessible contrast */
+.logo:hover, .logo:focus {
+    transform: translateY(-2px);
+}
+
+/* light-mode logo rules removed */
+
+/* Logo image in nav */
+.nav-logo {
+    display: block;
+    height: 56px; /* increased size */
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+    /* remove shadows from logo image */
+    filter: none;
+}
+
+/* Slightly reduce logo on small screens */
+@media (max-width: 520px) {
+    .nav-logo { height: 44px; max-width: 160px }
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    position: relative;
+    padding: 0.35rem 0.6rem;
+    transition: color 200ms ease, transform 220ms ease;
+    border-radius: 12px;
+    z-index: 1; /* ensure text sits above any decorative elements */
+    display: inline-block;
+}
+
+/* Nav bubble removed: disable pseudo-element so no background bubble shows */
+nav a::after{
+    content: none; /* disabled */
+    display: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    padding: 0 1rem;
+}
+
+/* -------------------------
+   Magic-line menu styles
+   Adapted to use site variables and fit inside the header
+   ------------------------- */
+.menu {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    gap: 0.4rem;
+    margin-left: 1rem;
+}
+.menu .menu-item {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu .menu-item a {
+    color: var(--text);
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.35rem 0.6rem;
+}
+.menu .menu-item h6 {
+    margin: 0;
+    padding: 0 .9rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: color 280ms ease;
+    user-select: none;
+}
+.menu .menu-item:hover h6,
+.menu .menu-item:focus-within h6,
+.menu .current-menu-item h6 {
+    color: var(--accent1);
+}
+
+/* the animated underline / magic line */
+.menu .wee {
+    position: absolute;
+    left: 0;
+    bottom: 6px;
+    height: 3px;
+    width: 0;
+    background-color: var(--accent1);
+    transition: left 0.48s cubic-bezier(0.19,1,0.22,1), width 0.48s cubic-bezier(0.19,1,0.22,1);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+/* make sure header/nav layout stays tidy on small screens */
+@media (max-width: 720px) {
+    nav { padding: 0 1rem; }
+    .menu { gap: 0.25rem; }
+    .menu .menu-item h6 { padding: 0 .6rem 1rem; font-size: 0.9rem }
+}
+
+/* Main Content & Sections */
+main {
+    padding-top: 80px; /* Offset for fixed header */
+}
+
+
+
+/* Scrollytelling styles removed (Workshops Showcase deleted) */
+/* Scrollytelling layout restored for Workshop Showcase */
+.scrolly {
+    padding: 0;
+    background: linear-gradient(180deg, rgba(2,6,23,0.0), rgba(2,6,23,0.02));
+}
+.scrolly-inner{
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 4%;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem;
+}
+.scrolly-graphic{
+    position: sticky;
+    top: 96px;
+    height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 30% 20%, rgba(46,91,255,0.10), transparent 30%), radial-gradient(circle at 70% 80%, rgba(155,89,182,0.08), transparent 30%);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(2,6,23,0.6);
+}
+.scrolly-graphic { position: relative; }
+.scrolly-graphic .graphic-name{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4.4vw, 3.4rem);
+    color: var(--text);
+    pointer-events: none;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+.scrolly-graphic .graphic-content{
+    color: var(--text);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3.8vw, 3.6rem);
+    text-align: center;
+    letter-spacing: 0.06em;
+}
+
+.scrolly-graphic .graphic-content.prompt {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0));
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.35);
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.scrolly-steps{ padding-top: 24px; }
+
+/* Scrolly step buttons */
+.scrolly-step{
+    display: block;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+.scrolly-step h3{ margin: 0 0 0.25rem 0; font-size: 1.05rem; }
+.scrolly-step p{ margin: 0; color: var(--muted); font-size: 0.95rem; }
+.scrolly-step:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(46,91,255,0.12);
+    border-color: rgba(46,91,255,0.45);
+    background: linear-gradient(180deg, rgba(46,91,255,0.02), rgba(155,89,182,0.01));
+}
+.scrolly-step:active{ transform: translateY(-1px); }
+.scrolly-step:focus-visible{
+    outline: 3px solid rgba(155,89,182,0.22);
+    outline-offset: 3px;
+}
+
+@media (max-width: 920px){
+    .scrolly-inner{ grid-template-columns: 1fr; }
+    .scrolly-graphic{ position: relative; top: 0; height: auto; padding: 2rem 1rem; margin-bottom: 1rem }
+}
+
+/* Tighter spacing for the Workshops Showcase heading */
+.scrolly-workshops > h2{
+    margin-top: 0.1rem;
+    margin-bottom: 0.45rem;
+    font-size: clamp(1.5rem, 3.0vw, 2.2rem);
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* ===========================
+     Shiny CTA / Envelope CTA
+     Converted and simplified from provided snippet
+     =========================== */
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --gradient-angle-offset {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --gradient-percent {
+    syntax: "<percentage>";
+    initial-value: 5%;
+    inherits: false;
+}
+
+@property --gradient-shine {
+    syntax: "<color>";
+    initial-value: white;
+    inherits: false;
+}
+
+:root {
+    --shiny-cta-bg: #000000;
+    --shiny-cta-bg-subtle: #1a1818;
+    --shiny-cta-fg: #ffffff;
+    --shiny-cta-highlight: #2e5bff; /* blue */
+    --shiny-cta-highlight-subtle: #8484ff;
+}
+
+.shiny-cta {
+    --duration: 3s;
+    isolation: isolate;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    font-family: inherit;
+    font-size: 1.05rem;
+    line-height: 1;
+    border: 1px solid transparent;
+    border-radius: 360px;
+    color: var(--shiny-cta-fg);
+    background: linear-gradient(var(--shiny-cta-bg), var(--shiny-cta-bg)) padding-box,
+        conic-gradient(
+            from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+            transparent,
+            var(--shiny-cta-highlight) var(--gradient-percent),
+            var(--gradient-shine) calc(var(--gradient-percent) * 2),
+            var(--shiny-cta-highlight) calc(var(--gradient-percent) * 3),
+            transparent calc(var(--gradient-percent) * 4)
+        ) border-box;
+    box-shadow: inset 0 0 0 1px var(--shiny-cta-bg-subtle);
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms;
+}
+
+.shiny-cta span { position: relative; z-index: 2; }
+
+.shiny-cta::before {
+    /* dots pattern */
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.9) 1px, transparent 1px);
+    background-size: 16px 16px;
+    border-radius: inherit;
+    opacity: 0.08;
+    z-index: 0;
+}
+
+.shiny-cta::after {
+    /* inner shimmer */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(-50deg, transparent, rgba(255,255,255,0.06), transparent);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.shiny-cta:hover, .shiny-cta:focus {
+    transform: translateY(-4px);
+    --gradient-percent: 20%;
+    --gradient-angle-offset: 95deg;
+    --gradient-shine: var(--shiny-cta-highlight-subtle);
+}
+
+/* A playful envelope-like variant for register button */
+.envelope-cta {
+    padding: 0.9rem 2.4rem;
+    background: linear-gradient(90deg,var(--accent1),var(--accent2));
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(46,91,255,0.12);
+}
+.envelope-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    transform-origin: center top;
+    transition: transform 320ms cubic-bezier(.2,.9,.3,1);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 40%);
+}
+.envelope-cta:hover::before { transform: translateY(-6px) rotateX(18deg); }
+
+/* ===========================
+     Flipping text (#flip)
+     =========================== */
+/* flip animation removed (no workshop ticker) */
+
+/* ===========================
+     Mouse-following background (bg-orbit)
+     =========================== */
+#bg-orbit {
+    position: fixed;
+    left: 0; top: 0; right: 0; bottom: 0;
+    z-index: -1000;
+    pointer-events: none;
+    /* dot-glow: primary soft glow + secondary faint glow */
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(46,91,255,0.16) 0%, rgba(46,91,255,0.08) 18%, transparent 40%),
+                radial-gradient(circle at calc(var(--mx,50%) + 6%) calc(var(--my,50%) - 8%), rgba(155,89,182,0.12) 0%, transparent 36%);
+    transition: background 120ms linear;
+}
+
+/* subtle dots overlay on top of bg-orbit */
+#bg-orbit::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+}
+
+/* add a subtle glowing ring that follows cursor using pseudo-element */
+#bg-orbit::before{
+    content: "";
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 1.5%, transparent 8%);
+    filter: blur(14px) saturate(120%);
+    opacity: 0.9;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* Kinetic loaders removed as requested */
+
+/* small responsive tweaks */
+@media (max-width:720px){
+    .shiny-cta { padding: 0.7rem 1.2rem; font-size: 0.95rem }
+}
+/* small variant for header */
+.small-cta { padding: 0.45rem 0.9rem; font-size: 0.95rem; border-radius: 12px }
+/* ===========================
+   Drawer (pure CSS)
+   =========================== */
+/* Drawer removed per request */
+section {
+    padding: 4rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+section h2 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: 2rem;
+        color: var(--accent2);
+        position: relative;
+        display: inline-block;
+}
+
+/* Only the hero heading uses the outline-to-solid hover; other headers remain solid */
+#hero h1 {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.92);
+    transition: color 320ms ease, -webkit-text-stroke 260ms ease, transform 220ms ease;
+}
+#hero h1.fill { color: var(--text); -webkit-text-stroke: 0px rgba(255,255,255,0); }
+
+/* subtle underline for section headings */
+section h2::after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%) scaleX(0);
+    height: 3px;
+    width: 64px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    transform-origin: center;
+    transition: transform 320ms cubic-bezier(.2,.9,.3,1);
+}
+section h2:hover::after { transform: translateX(-50%) scaleX(1); }
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(135deg, rgba(46,91,255,0.06), rgba(155,89,182,0.04));
+    color: var(--text);
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Blended rectangle behind hero removed as requested */
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Concept-two: per-letter grid layout for hero (matches markup with .hover > h1) */
+.concept-two {
+    display: grid;
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+    gap: 0.12rem;
+    align-items: center;
+    justify-content: center;
+}
+.concept-two .hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.concept-two .hover h1 {
+    margin: 0;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 6vw, 4.4rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--hero-stroke);
+    transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1),
+                color 260ms ease,
+                -webkit-text-stroke 260ms ease,
+                text-shadow 260ms ease;
+    transform-origin: center;
+    will-change: transform;
+}
+.concept-two .hover:hover h1 {
+    transform: translateY(-6px) scale(1.02);
+    color: var(--text);
+    -webkit-text-stroke: 2px transparent;
+    text-shadow: var(--hero-fill-shadow);
+}
+
+/* Removed light-mode concept-two overrides (dark-only site). */
+
+/* Allow keyboard and JS-driven fills as well */
+.concept-two .hover:focus-visible h1,
+.concept-two .hover h1.fill {
+    transform: translateY(-6px) scale(1.02);
+    color: var(--text);
+    -webkit-text-stroke: 2px transparent;
+    text-shadow: 0 14px 30px rgba(0,0,0,0.32);
+}
+
+/* Make hover blocks interactive for pointer & visible focus rings */
+.concept-two .hover { cursor: pointer; }
+.concept-two .hover:focus-visible { outline: 2px solid rgba(255,255,255,0.06); border-radius: 8px; }
+
+/* Responsive: fewer columns and smaller type on narrow viewports */
+@media (max-width: 768px) {
+    .concept-two {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 0.06rem;
+    }
+    .concept-two .hover h1 {
+        font-size: clamp(1.8rem, 6vw, 3.4rem);
+    }
+}
+
+@media (max-width: 420px) {
+    .concept-two {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.04rem;
+    }
+    .concept-two .hover h1 {
+        font-size: clamp(1.4rem, 8vw, 2.6rem);
+    }
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 8px 20px rgba(46,91,255,0.12);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.01);
+}
+
+/* About Section */
+#about {
+    background: #1a1a2e;
+}
+
+/* Removed light-mode overrides for #about */
+
+/* Organizer Section */
+#organizer {
+    background: #162447;
+}
+
+/* Removed light-mode overrides for #organizer */
+
+/* Key Highlights Section */
+#key-highlights ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#key-highlights li {
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    color: #fff;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+}
+
+/* Contact Section */
+#contact {
+    background: linear-gradient(90deg, rgba(46,91,255,0.06), rgba(155,89,182,0.06));
+    text-align: center;
+}
+
+/* Removed light-mode overrides for #contact */
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: #162447;
+    color: #fff;
+}
+
+/* Theme toggle removed (site is dark-only). */
+
+/* Reveal on scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 320ms ease;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+    /* blend outer padding with background: soft panel with rounded corners */
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 14px;
+    padding: 3.6rem 2rem;
+    box-shadow: 0 12px 30px rgba(2,6,23,0.6);
+    margin: 1.4rem 0;
+}
+
+/* Animations */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.95); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
+}
+
+@keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+    40% {
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+    80% {
+        transform: scale3d(0.97, 0.97, 0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+/* ===========================
+   Scrollytelling animations
+   =========================== */
+.scrolly-step {
+    transition: opacity 360ms cubic-bezier(.2,.9,.3,1), transform 360ms cubic-bezier(.2,.9,.3,1);
+    opacity: 0.75;
+    transform: translateY(8px);
+}
+.scrolly-step.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.scrolly-step.pop {
+    animation: popIn 420ms cubic-bezier(.2,.95,.23,1);
+}
+
+.scrolly-graphic .graphic-content {
+    display: inline-block;
+    transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.9,.3,1);
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+}
+.scrolly-graphic .graphic-content.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+@keyframes popIn {
+    0% { transform: translateY(6px) scale(0.98); opacity: 0; }
+    60% { transform: translateY(-4px) scale(1.03); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+
+/* Workshop session card + controls styling */
+.graphic-panel{
+    width: min(520px, 92%);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+}
+.session-card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 14px;
+    padding: 1.6rem;
+    width: 100%;
+    box-shadow: 0 18px 50px rgba(2,6,23,0.6);
+    transform-origin: center;
+    transition: transform 360ms cubic-bezier(.2,.9,.3,1), opacity 260ms ease;
+    opacity: 0;
+    transform: translateY(10px) scale(0.995);
+}
+.session-card.visible{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.session-title{ font-size: 1.3rem; margin: 0 0 0.4rem 0; color: var(--accent1); }
+.session-meta{ color: var(--muted); font-size: 0.9rem; margin: 0 0 0.6rem 0 }
+.session-desc{ color: var(--text); opacity: 0.9; margin-bottom: 0.8rem }
+.session-actions{ display: flex; gap: 0.6rem; }
+.details-btn{ background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--text); padding: 0.5rem 0.8rem; border-radius: 10px; cursor: pointer }
+.details-btn:hover{ box-shadow: 0 8px 24px rgba(46,91,255,0.06); transform: translateY(-3px); }
+
+.scrolly-controls{ display:flex; gap: 0.6rem; margin-top: 0.6rem }
+.scrolly-prev, .scrolly-next{ background: rgba(255,255,255,0.03); color: var(--text); border: none; width: 44px; height: 44px; border-radius: 10px; font-size: 1.6rem; cursor: pointer }
+.scrolly-prev:hover, .scrolly-next:hover{ background: linear-gradient(90deg, rgba(46,91,255,0.12), rgba(155,89,182,0.08)); transform: translateY(-3px) }
+
+/* Reduce motion for prefers-reduced-motion users */
+@media (prefers-reduced-motion: reduce){
+    .session-card, .scrolly-step, .scrolly-graphic .graphic-content { transition: none !important; animation: none !important }
+}
